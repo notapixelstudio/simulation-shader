@@ -11,7 +11,7 @@ uniform float height = 200.0;
 uniform vec2 draw_pos = vec2(0.0,0.0);
 uniform bool draw = false;
 uniform float point_radius = 100.0;
-uniform float blur = 2.0;
+uniform float blur = 3.0;
 
 void fragment(){
 	vec2 pos = vec2(draw_pos.x/width, draw_pos.y/height);
@@ -29,7 +29,7 @@ shader_param/height = 200.0
 shader_param/draw_pos = Vector2( 0, 0 )
 shader_param/draw = false
 shader_param/point_radius = 100.0
-shader_param/blur = 2.0
+shader_param/blur = 3.0
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
