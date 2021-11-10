@@ -1,8 +1,18 @@
 extends Control
 
+onready var outer_rect = $OuterRect
+onready var viewport = $OuterRect/Viewport
+onready var inner_rect = $OuterRect/Viewport/InnerRect
+
 func _ready():
-	$OuterRect/Viewport/InnerRect.texture = $OuterRect/Viewport.get_texture()
-	$OuterRect.texture = $OuterRect/Viewport.get_texture()
+	var size = outer_rect.rect_size
+	viewport.size = size
+	
+	inner_rect.material.set_shader_param("width", size.x)
+	inner_rect.material.set_shader_param("height", size.y)
+	
+	inner_rect.texture = viewport.get_texture()
+	outer_rect.texture = viewport.get_texture()
 	
 func _process(delta):
-	$OuterRect/Viewport/InnerRect.material.set_shader_param("draw_pos", get_local_mouse_position())
+	inner_rect.material.set_shader_param("draw_pos", get_local_mouse_position())
