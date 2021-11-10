@@ -16,3 +16,7 @@ func _ready():
 	
 func _process(delta):
 	inner_rect.material.set_shader_param("draw_pos", get_local_mouse_position())
+
+func _input(event):
+	if event is InputEventMouseButton:
+		inner_rect.material.set_shader_param("draw", event.pressed)
