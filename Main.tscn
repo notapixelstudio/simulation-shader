@@ -10,10 +10,11 @@ uniform float width = 200.0;
 uniform float height = 200.0;
 uniform vec2 draw_pos = vec2(0.0,0.0);
 uniform float point_radius = 20.0;
+uniform float blur = 2.0;
 
 void fragment(){
 	vec2 pos = vec2(draw_pos.x/width, draw_pos.y/height);
-	COLOR = 0.99*texture(TEXTURE, UV);
+	COLOR = 0.99*textureLod(SCREEN_TEXTURE, SCREEN_UV, blur);
 	vec3 new = vec3(step(distance(UV, pos), point_radius/width));
 	COLOR = max(vec4(new,1.0), COLOR);
 }"
@@ -24,6 +25,7 @@ shader_param/width = 200.0
 shader_param/height = 200.0
 shader_param/draw_pos = Vector2( 0, 0 )
 shader_param/point_radius = 20.0
+shader_param/blur = 2.0
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
