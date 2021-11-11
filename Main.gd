@@ -9,8 +9,9 @@ func _ready():
 	$Simulation.set_shader_param("width", size.x)
 	$Simulation.set_shader_param("height", size.y)
 	
-	# render the simulation in the TextureRect
+	# render the simulation both in the TextureRect and the Sprite
 	$TextureRect.texture = $Simulation.get_texture()
+	$Sprite.texture = $Simulation.get_texture()
 	
 func _process(delta):
 	# tell the mouse coordinates to the simulation shader

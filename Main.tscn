@@ -20,5 +20,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 100, 100 )
+scale = Vector2( 0.3, 0.3 )
+centered = false
+
 [node name="Simulation" parent="." instance=ExtResource( 1 )]
 shader = ExtResource( 3 )
