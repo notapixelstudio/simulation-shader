@@ -12,13 +12,12 @@ func _ready():
 	# render the simulation both in the TextureRect and the Sprite
 	$TextureRect.texture = $Simulation.get_texture()
 	$Sprite.texture = $Simulation.get_texture()
+	$ThreeDView.set_heightmap($Simulation.get_texture())
 	
 func _process(delta):
 	# tell the mouse coordinates to the simulation shader
 	$Simulation.set_shader_param("explosion_center", get_local_mouse_position())
 	
-	$ThreeDView.set_heightmap($Simulation.get_texture())
-
 func _input(event):
 	# set or reset the `explosion` parameter of the simulation shader according
 	# to the state of mouse buttons

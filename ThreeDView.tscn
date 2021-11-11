@@ -10,6 +10,7 @@ subdivide_depth = 19
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
+shader_param/exaggeration = 4.0
 
 [sub_resource type="Environment" id=4]
 
