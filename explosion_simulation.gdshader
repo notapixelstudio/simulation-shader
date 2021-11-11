@@ -3,7 +3,7 @@ shader_type canvas_item;
 uniform float width = 200.0;
 uniform float height = 200.0;
 
-uniform float blur = 3.0;
+uniform float blur = 1.0;
 
 uniform vec2 explosion_center = vec2(0.0,0.0);
 uniform float explosion_radius = 200.0;
@@ -17,7 +17,7 @@ void fragment(){
 	COLOR = 0.5 - 0.96*(0.5-f);
 	if(explosion) {
 		float d = distance(UV, normalized_explosion_center)*explosion_radius;
-		vec3 new = -vec3(sin(d*0.2)/exp(d*0.1));
+		vec3 new = -vec3(sin(d*explosion_frequency)/exp(d*explosion_decay));
 		COLOR = clamp(COLOR + vec4(new,1.0), 0.0, 1.0);
 	}
 }
