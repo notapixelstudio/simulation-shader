@@ -1,43 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Simulation.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-uniform float width = 200.0;
-uniform float height = 200.0;
-
-uniform float blur = 3.0;
-
-uniform vec2 explosion_center = vec2(0.0,0.0);
-uniform float explosion_radius = 200.0;
-uniform bool explosion = false;
-uniform float explosion_frequency = 0.2;
-uniform float explosion_decay = 0.1;
-
-void fragment(){
-	vec2 normalized_explosion_center = vec2(explosion_center.x/width, explosion_center.y/height);
-	vec4 f = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur);
-	COLOR = 0.5 - 0.96*(0.5-f);
-	if(explosion) {
-		float d = distance(UV, normalized_explosion_center)*explosion_radius;
-		vec3 new = -vec3(sin(d*0.2)/exp(d*0.1));
-		COLOR = clamp(COLOR + vec4(new,1.0), 0.0, 1.0);
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/width = 200.0
-shader_param/height = 200.0
-shader_param/blur = 3.0
-shader_param/explosion_center = Vector2( 0, 0 )
-shader_param/explosion_radius = 200.0
-shader_param/explosion = false
-shader_param/explosion_frequency = 0.2
-shader_param/explosion_decay = 0.1
+[ext_resource path="res://explosion_simulation.gdshader" type="Shader" id=3]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -47,7 +12,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OuterRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 expand = true
@@ -55,17 +20,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="OuterRect"]
-size = Vector2( 100, 100 )
-render_target_v_flip = true
-render_target_clear_mode = 2
-render_target_update_mode = 3
-
-[node name="InnerRect" type="TextureRect" parent="OuterRect/Viewport"]
-material = SubResource( 2 )
-margin_right = 40.0
-margin_bottom = 40.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Simulation" parent="." instance=ExtResource( 1 )]
+shader = ExtResource( 3 )
