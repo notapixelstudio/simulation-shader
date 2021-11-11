@@ -16,6 +16,8 @@ func _ready():
 func _process(delta):
 	# tell the mouse coordinates to the simulation shader
 	$Simulation.set_shader_param("explosion_center", get_local_mouse_position())
+	
+	$ThreeDView.set_heightmap($Simulation.get_texture())
 
 func _input(event):
 	# set or reset the `explosion` parameter of the simulation shader according
