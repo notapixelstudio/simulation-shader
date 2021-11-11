@@ -39,6 +39,8 @@ material/0 = SubResource( 3 )
 
 [node name="Camera" type="Camera" parent="Viewport/Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 20 )
+projection = 1
+size = 50.0
 
 [node name="OmniLight" type="OmniLight" parent="Viewport/Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
