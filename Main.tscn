@@ -8,17 +8,23 @@ code = "shader_type canvas_item;
 
 uniform float width = 200.0;
 uniform float height = 200.0;
-uniform vec2 draw_pos = vec2(0.0,0.0);
-uniform bool draw = false;
-uniform float point_radius = 100.0;
+
 uniform float blur = 3.0;
 
+uniform vec2 explosion_center = vec2(0.0,0.0);
+uniform float explosion_radius = 200.0;
+uniform bool explosion = false;
+uniform float explosion_frequency = 0.2;
+uniform float explosion_decay = 0.1;
+
 void fragment(){
-	vec2 pos = vec2(draw_pos.x/width, draw_pos.y/height);
-	COLOR = 0.99*textureLod(SCREEN_TEXTURE, SCREEN_UV, blur);
-	if(draw) {
-		vec3 new = vec3(step(distance(UV, pos), point_radius/width));
-		COLOR = max(vec4(new,1.0), COLOR);
+	vec2 normalized_explosion_center = vec2(explosion_center.x/width, explosion_center.y/height);
+	vec4 f = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur);
+	COLOR = 0.5 - 0.96*(0.5-f);
+	if(explosion) {
+		float d = distance(UV, normalized_explosion_center)*explosion_radius;
+		vec3 new = -vec3(sin(d*0.2)/exp(d*0.1));
+		COLOR = COLOR + vec4(new,1.0);
 	}
 }"
 
@@ -26,10 +32,12 @@ void fragment(){
 shader = SubResource( 1 )
 shader_param/width = 200.0
 shader_param/height = 200.0
-shader_param/draw_pos = Vector2( 0, 0 )
-shader_param/draw = false
-shader_param/point_radius = 100.0
 shader_param/blur = 3.0
+shader_param/explosion_center = Vector2( 0, 0 )
+shader_param/explosion_radius = 200.0
+shader_param/explosion = false
+shader_param/explosion_frequency = 0.2
+shader_param/explosion_decay = 0.1
 
 [node name="Main" type="Control"]
 anchor_right = 1.0

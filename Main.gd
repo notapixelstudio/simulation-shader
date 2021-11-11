@@ -15,8 +15,8 @@ func _ready():
 	outer_rect.texture = viewport.get_texture()
 	
 func _process(delta):
-	inner_rect.material.set_shader_param("draw_pos", get_local_mouse_position())
+	inner_rect.material.set_shader_param("explosion_center", get_local_mouse_position())
 
 func _input(event):
 	if event is InputEventMouseButton:
-		inner_rect.material.set_shader_param("draw", event.pressed)
+		inner_rect.material.set_shader_param("explosion", event.pressed)
