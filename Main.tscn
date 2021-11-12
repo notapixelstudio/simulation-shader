@@ -28,8 +28,6 @@ scale = Vector2( 0.3, 0.3 )
 centered = false
 
 [node name="ThreeDView" parent="." instance=ExtResource( 4 )]
-position = Vector2( 100, 100 )
-scale = Vector2( 0.35, 0.35 )
 
 [node name="Simulation" parent="." instance=ExtResource( 1 )]
 shader = ExtResource( 3 )

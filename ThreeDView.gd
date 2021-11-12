@@ -1,4 +1,4 @@
-extends Sprite
+extends Polygon2D
 
 onready var camera = $Viewport/Spatial/Camera
 onready var terrain = $Viewport/Spatial/Terrain
