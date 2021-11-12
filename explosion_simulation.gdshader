@@ -6,7 +6,7 @@ uniform float height = 200.0;
 uniform float blur = 0.5;
 
 uniform vec2 explosion_center = vec2(0.0,0.0);
-uniform float explosion_radius = 200.0;
+uniform float explosion_radius = 0.003;
 uniform bool explosion = false;
 uniform float explosion_frequency = 0.2;
 uniform float explosion_decay = 0.1;
@@ -19,7 +19,7 @@ void fragment(){
 	vec4 f = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur);
 	COLOR = sea_level - 0.94*(sea_level-f);
 	if(explosion) {
-		float d = distance(UV, normalized_explosion_center)*explosion_radius;
+		float d = distance(UV, normalized_explosion_center)/explosion_radius;
 		vec2 delta = UV-normalized_explosion_center;
 		vec3 new = vec3(delta.x/exp(d*explosion_decay), -sin(d*explosion_frequency)/exp(d*explosion_decay), delta.y/exp(d*explosion_decay));
 		COLOR = clamp(COLOR + vec4(new,1.0), 0.0, 1.0);

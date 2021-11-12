@@ -14,6 +14,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 expand = true
@@ -22,6 +23,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 modulate = Color( 0.909804, 0.909804, 0.909804, 1 )
 position = Vector2( 25, 400 )
 scale = Vector2( 0.3, 0.3 )
